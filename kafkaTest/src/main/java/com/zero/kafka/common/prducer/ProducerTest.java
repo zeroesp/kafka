@@ -27,6 +27,7 @@ public class ProducerTest {
                 String msg = "Message " + i + new Date(System.currentTimeMillis());
                 kafkaProcuder.send(new ProducerRecord<String, String>("test", msg));
                 System.out.println("Sent:" + msg);
+                //Thread.sleep(1000);
             }
 	        result = true;
         }catch(Exception e){
