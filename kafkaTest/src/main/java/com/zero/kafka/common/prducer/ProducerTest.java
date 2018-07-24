@@ -20,11 +20,17 @@ public class ProducerTest {
         kafkaProps.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
         Producer< String, String> kafkaProcuder = null;
+        
+        String[] ips = {"101","12","131","143","112","51","74","36","29","181"};
+        String[] hosts = {"poc","stg","dev","op","test"};
 
         try {
         	kafkaProcuder = new KafkaProducer<String, String>(kafkaProps);
         	for (int i = 0; i < topicGenNum; i++) {
-                String msg = "Message " + i + new Date(System.currentTimeMillis());
+                //String msg = "Message " + i + new Date(System.currentTimeMillis());
+        	    String msg = "Message " + i + "," + hosts[(int)Math.floor(Math.random()*4.9)] + " "
+        	                 + ips[(int)Math.floor(Math.random()*9.9)] + "." + ips[(int)Math.floor(Math.random()*9.9)] + "."
+        	                 + ips[(int)Math.floor(Math.random()*9.9)] + "." + ips[(int)Math.floor(Math.random()*9.9)] ;
                 kafkaProcuder.send(new ProducerRecord<String, String>("test", msg));
                 System.out.println("Sent:" + msg);
                 //Thread.sleep(1000);
